@@ -4,6 +4,7 @@
 //Steve Mario Correa
 //Assignment 1
 //This software manages the queue for the printer in Engineering #107 using heaps, prioritiy queues, and template classes.
+#include "printjob.h"
 #include "pqtype.h"
 #include <iostream>
 void displayMenu (
