@@ -14,9 +14,11 @@ typedef PQType<int> prioq;
 void processChoice (
 	bool&,
 	const char&,
+	int&,
 	prioq&
 );
 void addJob (
+	int&,
 	prioq&
 );
 void processJob (
@@ -29,10 +31,11 @@ int main (
 ) {
 	bool bUserWantsToManageQueue = true;
 	char chOperationToDo;
+	int nJobs = 0;
 	prioq PrinterQueue (20);
 	while (bUserWantsToManageQueue) {
 		displayMenu (chOperationToDo);
-		processChoice (bUserWantsToManageQueue, chOperationToDo, PrinterQueue);
+		processChoice (bUserWantsToManageQueue, chOperationToDo, nJobs, PrinterQueue);
 	}
 	return 0;
 }
@@ -52,16 +55,18 @@ void displayMenu (
 void processChoice (
 	bool& bUserWantsToManageQueue,
 	const char& chOperationToDo,
+	int& nJobs,
 	prioq& PrinterQueue
 ) {
 	switch (chOperationToDo) {
-		case '1': { addJob (PrinterQueue); break; }
+		case '1': { addJob (nJobs, PrinterQueue); break; }
 		case '2': { processJob (PrinterQueue); break; }
 		case '3': { inspectQueue (PrinterQueue); break; }
 		case '4': { bUserWantsToManageQueue = false; break; }
 	}
 }
 void addJob (
+	int& nJobs,
 	prioq& PrinterQueue
 ) {
 	char chUser;
@@ -72,11 +77,11 @@ void addJob (
 	std::cout << "\n";
 	switch (chUser) {
 		case 'I':
-		case 'i': { PrinterQueue.Enqueue (1); break; }
+		case 'i': { nJobs++; PrinterQueue.Enqueue (1); break; }
 		case 'T':
-		case 't': { PrinterQueue.Enqueue (2); break; }
+		case 't': { nJobs++; PrinterQueue.Enqueue (2); break; }
 		case 'S':
-		case 's': { PrinterQueue.Enqueue (3); break; }
+		case 's': { nJobs++; PrinterQueue.Enqueue (3); break; }
 		default: { break; }
 	}
 }
