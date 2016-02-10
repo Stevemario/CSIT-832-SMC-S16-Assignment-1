@@ -6,8 +6,8 @@ class PQType {
 	public: PQType (int);
 	public: ~PQType ();
 	public: void MakeEmpty ();
-	public: bool IsEmpty ();
-	public: bool IsFull ();
+	public: bool IsEmpty () const;
+	public: bool IsFull () const;
 	public: void Enqueue (ItemType);
 	public: void Dequeue (ItemType&);
 	private: int length;

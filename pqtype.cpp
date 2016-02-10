@@ -13,11 +13,11 @@ void PQType<ItemType>::MakeEmpty () {
 	length = 0;
 }
 template<class ItemType>
-bool PQType<ItemType>::IsEmpty () {
+bool PQType<ItemType>::IsEmpty () const {
 	return (length == 0);
 }
 template<class ItemType>
-bool PQType<ItemType>::IsFull () {
+bool PQType<ItemType>::IsFull () const {
 	return (length == maxItems);
 }
 template<class ItemType>

@@ -9,25 +9,26 @@
 void displayMenu (
 	char&
 );
+typedef PQType<int> prioq;
 void processChoice (
 	bool&,
 	const char&,
-	int&
+	prioq&
 );
 void addJob (
-	int&
+	prioq&
 );
 void processJob (
-	int&
+	prioq&
 );
 void inspectQueue (
-	const int&
+	const prioq&
 );
 int main (
 ) {
 	bool bUserWantsToManageQueue = true;
 	char chOperationToDo;
-	int PrinterQueue;
+	prioq PrinterQueue (20);
 	while (bUserWantsToManageQueue) {
 		displayMenu (chOperationToDo);
 		processChoice (bUserWantsToManageQueue, chOperationToDo, PrinterQueue);
@@ -50,7 +51,7 @@ void displayMenu (
 void processChoice (
 	bool& bUserWantsToManageQueue,
 	const char& chOperationToDo,
-	int& PrinterQueue
+	prioq& PrinterQueue
 ) {
 	switch (chOperationToDo) {
 		case '1': { addJob (PrinterQueue); break; }
@@ -60,27 +61,46 @@ void processChoice (
 	}
 }
 void addJob (
-	int& PrinterQueue
+	prioq& PrinterQueue
 ) {
 	char chUser;
+	std::cout << "\n";
 	std::cout << "Instructor (I or i), TA (T or t), or Student (S or s)? ";
 	std::cin >> chUser;
 	std::cin.ignore (std::numeric_limits<std::streamsize>::max (), '\n');
+	std::cout << "\n";
 	switch (chUser) {
 		case 'I':
-		case 'i': { break; }
+		case 'i': { PrinterQueue.Enqueue (1); break; }
 		case 'T':
-		case 't': { break; }
+		case 't': { PrinterQueue.Enqueue (2); break; }
 		case 'S':
-		case 's': { break; }
+		case 's': { PrinterQueue.Enqueue (3); break; }
 		default: { break; }
 	}
 }
 void processJob (
-	int& PrinterQueue
+	prioq& PrinterQueue
 ) {
+	if (PrinterQueue.IsEmpty ()) {
+		std::cout << "\n";
+		std::cout << "No print jobs in queue.\n";
+		std::cout << "\n";
+	} else {
+		int jobProcessed;
+		PrinterQueue.Dequeue (jobProcessed);
+		std::cout << "\n";
+		std::cout << "Now printing job #" << "X" << ": " << "Y" << "\n";
+		std::cout << "\n";
+	}
 }
 void inspectQueue (
-	const int& PrinterQueue
+	const prioq& PrinterQueue
 ) {
+	if (PrinterQueue.IsEmpty ()) {
+		std::cout << "\n";
+		std::cout << "No print jobs in queue.\n";
+		std::cout << "\n";
+	} else {
+	}
 }
