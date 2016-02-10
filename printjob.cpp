@@ -27,17 +27,38 @@ int printjob::nJob (
 ) const {
 	return m_nJob;
 }
-bool printjob::operator<= (const printjob& printjobToCompare) const {
-	bool bMemberHasAsGoodPriority = false;
+bool printjob::operator< (const printjob& printjobToCompare) const {
+	bool bMemberHasBetterPriority = false;
 	int nUTMember = int (m_printerusertype);
 	int nUTToCompare = int (printjobToCompare.printerusertype_ ());
 	if (nUTMember < nUTToCompare) {
-		bMemberHasAsGoodPriority = true;
+		bMemberHasBetterPriority = true;
 	} else if (nUTMember == nUTToCompare) {
 		int nJobMember = m_nJob;
 		int nJobToCompare = printjobToCompare.nJob ();
-		if (nJobMember <= nJobToCompare)
-			bMemberHasAsGoodPriority = true;
+		if (nJobMember < nJobToCompare)
+			bMemberHasBetterPriority = true;
+	}
+	return bMemberHasBetterPriority;
+}
+bool printjob::operator== (const printjob& printjobToCompare) const {
+	bool bMemberHasEqualPriority = false;
+	int nUTMember = int (m_printerusertype);
+	int nUTToCompare = int (printjobToCompare.printerusertype_ ());
+	if (nUTMember == nUTToCompare) {
+		int nJobMember = m_nJob;
+		int nJobToCompare = printjobToCompare.nJob ();
+		if (nJobMember == nJobToCompare)
+			bMemberHasEqualPriority = true;
+	}
+	return bMemberHasEqualPriority;
+}
+bool printjob::operator<= (const printjob& printjobToCompare) const {
+	bool bMemberHasAsGoodPriority = false;
+	if (this->operator<(printjobToCompare)) {
+		bMemberHasAsGoodPriority = true;
+	} else if (this->operator==(printjobToCompare)) {
+		bMemberHasAsGoodPriority = true;
 	}
 	return bMemberHasAsGoodPriority;
 }
