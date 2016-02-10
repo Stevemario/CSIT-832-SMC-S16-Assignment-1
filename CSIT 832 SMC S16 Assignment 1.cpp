@@ -1,8 +1,8 @@
 //Los Angeles Valley College
-//CSIT 839
-//Spring 2014
+//CSIT 832
+//Spring 2016
 //Steve Mario Correa
-//Assignment 5
+//Assignment 1
 //This software manages the queue for the printer in Engineering #107 using heaps, prioritiy queues, and template classes.
 #include "pqtype.h"
 #include <iostream>
