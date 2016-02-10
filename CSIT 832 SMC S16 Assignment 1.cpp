@@ -96,7 +96,9 @@ void processJob (
 		printjob jobProcessed;
 		PrinterQueue.Dequeue (jobProcessed);
 		std::cout << "\n";
-		std::cout << "Now printing job #" << "X" << ": " << "Y" << "\n";
+		std::cout << "Now printing job #" <<
+			std::to_string (jobProcessed.nJob ()) << ": " <<
+			s_ (jobProcessed.printerusertype_ ()) << "\n";
 		std::cout << "\n";
 	}
 }
