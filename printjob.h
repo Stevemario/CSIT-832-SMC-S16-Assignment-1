@@ -14,5 +14,6 @@ class printjob {
 	public: printjob (printerusertype, int);
 	public: printerusertype printerusertype_ () const;
 	public: int nJob () const;
+	public: bool operator<= (const printjob&) const;
 };
 #endif
