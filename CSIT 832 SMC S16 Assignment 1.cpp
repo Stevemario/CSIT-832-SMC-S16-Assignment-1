@@ -10,7 +10,7 @@
 void displayMenu (
 	char&
 );
-typedef PQType<int> prioq;
+typedef PQType<printjob> prioq;
 void processChoice (
 	bool&,
 	const char&,
@@ -77,11 +77,11 @@ void addJob (
 	std::cout << "\n";
 	switch (chUser) {
 		case 'I':
-		case 'i': { nJobs++; PrinterQueue.Enqueue (1); break; }
+		case 'i': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::Instructor, nJobs)); break; }
 		case 'T':
-		case 't': { nJobs++; PrinterQueue.Enqueue (2); break; }
+		case 't': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::TeachersAssistant, nJobs)); break; }
 		case 'S':
-		case 's': { nJobs++; PrinterQueue.Enqueue (3); break; }
+		case 's': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::Student, nJobs)); break; }
 		default: { break; }
 	}
 }
@@ -93,7 +93,7 @@ void processJob (
 		std::cout << "No print jobs in queue.\n";
 		std::cout << "\n";
 	} else {
-		int jobProcessed;
+		printjob jobProcessed;
 		PrinterQueue.Dequeue (jobProcessed);
 		std::cout << "\n";
 		std::cout << "Now printing job #" << "X" << ": " << "Y" << "\n";
