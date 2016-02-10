@@ -22,8 +22,8 @@ bool PQType<ItemType>::IsFull () const {
 }
 template<class ItemType>
 void PQType<ItemType>::Enqueue (ItemType newItem) {
+	items.elements[length] = newItem;
 	length++;
-	items.elements[length-1] = newItem;
 	items.ReheapUp (0, length-1);
 }
 template<class ItemType>
