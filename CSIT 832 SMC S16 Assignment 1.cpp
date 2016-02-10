@@ -14,6 +14,15 @@ void processChoice (
 	const char&,
 	int&
 );
+void addJob (
+	int&
+);
+void processJob (
+	int&
+);
+void inspectQueue (
+	const int&
+);
 int main (
 ) {
 	bool bUserWantsToManageQueue = true;
@@ -44,9 +53,34 @@ void processChoice (
 	int& PrinterQueue
 ) {
 	switch (chOperationToDo) {
-		case '1': { PrinterQueue++; break; }
-		case '2': { PrinterQueue++; break; }
-		case '3': { PrinterQueue++; break; }
+		case '1': { addJob (PrinterQueue); break; }
+		case '2': { processJob (PrinterQueue); break; }
+		case '3': { inspectQueue (PrinterQueue); break; }
 		case '4': { bUserWantsToManageQueue = false; break; }
 	}
+}
+void addJob (
+	int& PrinterQueue
+) {
+	char chUser;
+	std::cout << "Instructor (I or i), TA (T or t), or Student (S or s)? ";
+	std::cin >> chUser;
+	std::cin.ignore (std::numeric_limits<std::streamsize>::max (), '\n');
+	switch (chUser) {
+		case 'I':
+		case 'i': { break; }
+		case 'T':
+		case 't': { break; }
+		case 'S':
+		case 's': { break; }
+		default: { break; }
+	}
+}
+void processJob (
+	int& PrinterQueue
+) {
+}
+void inspectQueue (
+	const int& PrinterQueue
+) {
 }
