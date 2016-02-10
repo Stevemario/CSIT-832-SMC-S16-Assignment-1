@@ -10,6 +10,9 @@ std::string s_ (printerusertype printerusertype_) {
 	return s_;
 }
 printjob::printjob (
+) {
+}
+printjob::printjob (
 	printerusertype printerusertype_,
 	int nJob
 ) {

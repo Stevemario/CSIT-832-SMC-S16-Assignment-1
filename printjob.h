@@ -8,6 +8,7 @@ enum class printerusertype {
 };
 std::string s_ (printerusertype);
 class printjob {
+	public: printjob ();
 	private: printerusertype m_printerusertype;
 	private: int m_nJob;
 	public: printjob (printerusertype, int);
