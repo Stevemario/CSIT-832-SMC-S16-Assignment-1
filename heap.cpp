@@ -42,7 +42,7 @@ void HeapType<ItemType>::ReheapUp (int root, int bottom)
 {
 	int parent;
 
-	if (bottom > root) {
+	if (root < bottom) {
 		parent = (bottom - 1) / 2;
 		if (elements[parent] < elements[bottom]) {
 			Swap ( elements[parent], elements[bottom]);
