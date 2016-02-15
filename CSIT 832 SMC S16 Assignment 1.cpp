@@ -110,5 +110,16 @@ void inspectQueue (
 		std::cout << "No print jobs in queue.\n";
 		std::cout << "\n";
 	} else {
+		int nJobsQueued = PrinterQueue.nElements ();
+		printjob* QueueJobs = PrinterQueue.copy_elements ();
+		printjob* printjobToInspect;
+		std::cout << "\n";
+		for (int i = 0; i < nJobsQueued; i++) {
+			printjobToInspect = &QueueJobs[i];
+			std::cout << "job #" <<
+				std::to_string (printjobToInspect->nJob ()) << ": " <<
+				s_ (printjobToInspect->printerusertype_ ()) << "\n";
+		}
+		std::cout << "\n";
 	}
 }
