@@ -14,6 +14,7 @@ class PQType {
 	private: HeapType<ItemType> items;
 	private: int maxItems;
 	public: int nElements () const;
+	public: ItemType* copy_elements () const;
 };
 #include "pqtype.cpp"
 #endif

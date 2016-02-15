@@ -37,3 +37,11 @@ template<class ItemType>
 int PQType<ItemType>::nElements () const {
 	return length;
 }
+template<class ItemType>
+ItemType* PQType<ItemType>::copy_elements () const {
+	ItemType* copy = new ItemType[length];
+	for (int i = 0; i < length; i++) {
+		copy[i] = items.elements[i];
+	}
+	return copy;
+}
