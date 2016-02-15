@@ -13,6 +13,7 @@ class PQType {
 	private: int length;
 	private: HeapType<ItemType> items;
 	private: int maxItems;
+	public: int nElements () const;
 };
 #include "pqtype.cpp"
 #endif
