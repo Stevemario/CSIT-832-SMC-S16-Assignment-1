@@ -69,20 +69,26 @@ void addJob (
 	int& nJobs,
 	prioq& PrinterQueue
 ) {
-	char chUser;
-	std::cout << "\n";
-	std::cout << "Instructor (I or i), TA (T or t), or Student (S or s)? ";
-	std::cin >> chUser;
-	std::cin.ignore (std::numeric_limits<std::streamsize>::max (), '\n');
-	std::cout << "\n";
-	switch (chUser) {
-		case 'I':
-		case 'i': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::Instructor, nJobs)); break; }
-		case 'T':
-		case 't': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::TeachersAssistant, nJobs)); break; }
-		case 'S':
-		case 's': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::Student, nJobs)); break; }
-		default: { break; }
+	if (PrinterQueue.IsFull ()) {
+		std::cout << "\n";
+		std::cout << "Heap is full.\n";
+		std::cout << "\n";
+	} else {
+		char chUser;
+		std::cout << "\n";
+		std::cout << "Instructor (I or i), TA (T or t), or Student (S or s)? ";
+		std::cin >> chUser;
+		std::cin.ignore (std::numeric_limits<std::streamsize>::max (), '\n');
+		std::cout << "\n";
+		switch (chUser) {
+			case 'I':
+			case 'i': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::Instructor, nJobs)); break; }
+			case 'T':
+			case 't': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::TeachersAssistant, nJobs)); break; }
+			case 'S':
+			case 's': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::Student, nJobs)); break; }
+			default: { break; }
+		}
 	}
 }
 void processJob (
