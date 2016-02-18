@@ -1,5 +1,7 @@
 #include "printjob.h"
-std::string s_ (printerusertype printerusertype_) {
+std::string s_ (
+	printerusertype printerusertype_
+) {
 	std::string s_;
 	switch (printerusertype_) {
 		case printerusertype::Instructor: { s_ = "Instructor"; break; }
@@ -27,7 +29,9 @@ int printjob::nJob (
 ) const {
 	return m_nJob;
 }
-bool printjob::operator< (const printjob& printjobToCompare) const {
+bool printjob::operator< (
+	const printjob& printjobToCompare
+) const {
 	bool bMemberHasWorsePriority = false;
 	int nUTMember = int (m_printerusertype);
 	int nUTToCompare = int (printjobToCompare.printerusertype_ ());
@@ -41,7 +45,9 @@ bool printjob::operator< (const printjob& printjobToCompare) const {
 	}
 	return bMemberHasWorsePriority;
 }
-bool printjob::operator== (const printjob& printjobToCompare) const {
+bool printjob::operator== (
+	const printjob& printjobToCompare
+) const {
 	bool bMemberHasEqualPriority = false;
 	int nUTMember = int (m_printerusertype);
 	int nUTToCompare = int (printjobToCompare.printerusertype_ ());
@@ -53,7 +59,9 @@ bool printjob::operator== (const printjob& printjobToCompare) const {
 	}
 	return bMemberHasEqualPriority;
 }
-bool printjob::operator<= (const printjob& printjobToCompare) const {
+bool printjob::operator<= (
+	const printjob& printjobToCompare
+) const {
 	bool bMemberHasAsGoodPriority = false;
 	if (this->operator<(printjobToCompare)) {
 		bMemberHasAsGoodPriority = true;
