@@ -10,29 +10,29 @@
 void displayMenu (
 	char&
 );
-typedef PriorityQueue<printjob> prioq;
+typedef PriorityQueue<printjob> PJPrioQ;
 void processChoice (
 	bool&,
 	const char&,
 	int&,
-	prioq&
+	PJPrioQ&
 );
 void addJob (
 	int&,
-	prioq&
+	PJPrioQ&
 );
 void processJob (
-	prioq&
+	PJPrioQ&
 );
 void inspectQueue (
-	const prioq&
+	const PJPrioQ&
 );
 int main (
 ) {
 	bool bUserWantsToManageQueue = true;
 	char chOperationToDo;
 	int nJobs = 0;
-	prioq PrinterQueue (20);
+	PJPrioQ PrinterQueue (20);
 	while (bUserWantsToManageQueue) {
 		displayMenu (chOperationToDo);
 		processChoice (bUserWantsToManageQueue, chOperationToDo, nJobs, PrinterQueue);
@@ -56,7 +56,7 @@ void processChoice (
 	bool& bUserWantsToManageQueue,
 	const char& chOperationToDo,
 	int& nJobs,
-	prioq& PrinterQueue
+	PJPrioQ& PrinterQueue
 ) {
 	switch (chOperationToDo) {
 		case '1': { addJob (nJobs, PrinterQueue); break; }
@@ -67,7 +67,7 @@ void processChoice (
 }
 void addJob (
 	int& nJobs,
-	prioq& PrinterQueue
+	PJPrioQ& PrinterQueue
 ) {
 	if (PrinterQueue.bIsFull ()) {
 		std::cout << "\n";
@@ -92,7 +92,7 @@ void addJob (
 	}
 }
 void processJob (
-	prioq& PrinterQueue
+	PJPrioQ& PrinterQueue
 ) {
 	if (PrinterQueue.bIsEmpty ()) {
 		std::cout << "\n";
@@ -109,14 +109,14 @@ void processJob (
 	}
 }
 void inspectQueue (
-	const prioq& PrinterQueue
+	const PJPrioQ& PrinterQueue
 ) {
 	if (PrinterQueue.bIsEmpty ()) {
 		std::cout << "\n";
 		std::cout << "No print jobs in queue.\n";
 		std::cout << "\n";
 	} else {
-		prioq PrinterQueueTempCopy (PrinterQueue);
+		PJPrioQ PrinterQueueTempCopy (PrinterQueue);
 		printjob printjobToInspect;
 		std::cout << "\n";
 		while (PrinterQueueTempCopy.bIsEmpty () == false) {
