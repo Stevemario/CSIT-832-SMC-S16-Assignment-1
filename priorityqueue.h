@@ -1,5 +1,5 @@
-#ifndef PQTYPE_H
-#define PQTYPE_H
+#ifndef PRIORITYQUEUE_H
+#define PRIORITYQUEUE_H
 #include "heap.h"
 template<class PriorityQueueType>
 class PriorityQueue {
@@ -17,5 +17,5 @@ class PriorityQueue {
 	private: Heap<PriorityQueueType> items;
 	public: PriorityQueueType element (int) const;
 };
-#include "pqtype.cpp"
+#include "priorityqueue.cpp"
 #endif
