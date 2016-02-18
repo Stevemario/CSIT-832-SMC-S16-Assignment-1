@@ -63,6 +63,7 @@ void processChoice (
 		case '2': { processJob (PrinterQueue); break; }
 		case '3': { inspectQueue (PrinterQueue); break; }
 		case '4': { bUserWantsToManageQueue = false; break; }
+		default: { break; }
 	}
 }
 void addJob (
