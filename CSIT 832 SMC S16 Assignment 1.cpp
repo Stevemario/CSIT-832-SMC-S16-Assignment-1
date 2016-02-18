@@ -69,7 +69,7 @@ void addJob (
 	int& nJobs,
 	prioq& PrinterQueue
 ) {
-	if (PrinterQueue.IsFull ()) {
+	if (PrinterQueue.bIsFull ()) {
 		std::cout << "\n";
 		std::cout << "Heap is full.\n";
 		std::cout << "\n";
@@ -82,11 +82,11 @@ void addJob (
 		std::cout << "\n";
 		switch (chUser) {
 			case 'I':
-			case 'i': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::Instructor, nJobs)); break; }
+			case 'i': { nJobs++; PrinterQueue.enqueue (printjob (printerusertype::Instructor, nJobs)); break; }
 			case 'T':
-			case 't': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::TeachersAssistant, nJobs)); break; }
+			case 't': { nJobs++; PrinterQueue.enqueue (printjob (printerusertype::TeachersAssistant, nJobs)); break; }
 			case 'S':
-			case 's': { nJobs++; PrinterQueue.Enqueue (printjob (printerusertype::Student, nJobs)); break; }
+			case 's': { nJobs++; PrinterQueue.enqueue (printjob (printerusertype::Student, nJobs)); break; }
 			default: { break; }
 		}
 	}
@@ -94,13 +94,13 @@ void addJob (
 void processJob (
 	prioq& PrinterQueue
 ) {
-	if (PrinterQueue.IsEmpty ()) {
+	if (PrinterQueue.bIsEmpty ()) {
 		std::cout << "\n";
 		std::cout << "No print jobs in queue.\n";
 		std::cout << "\n";
 	} else {
 		printjob jobProcessed;
-		PrinterQueue.Dequeue (jobProcessed);
+		PrinterQueue.dequeue (jobProcessed);
 		std::cout << "\n";
 		std::cout << "Now printing job #" <<
 			std::to_string (jobProcessed.nJob ()) << ": " <<
@@ -111,7 +111,7 @@ void processJob (
 void inspectQueue (
 	const prioq& PrinterQueue
 ) {
-	if (PrinterQueue.IsEmpty ()) {
+	if (PrinterQueue.bIsEmpty ()) {
 		std::cout << "\n";
 		std::cout << "No print jobs in queue.\n";
 		std::cout << "\n";

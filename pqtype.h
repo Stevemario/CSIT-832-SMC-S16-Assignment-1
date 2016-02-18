@@ -5,11 +5,11 @@ template<class ItemType>
 class PQType {
 	public: PQType (int);
 	public: ~PQType ();
-	public: void MakeEmpty ();
-	public: bool IsEmpty () const;
-	public: bool IsFull () const;
-	public: void Enqueue (ItemType);
-	public: void Dequeue (ItemType&);
+	public: void makeEmpty ();
+	public: bool bIsEmpty () const;
+	public: bool bIsFull () const;
+	public: void enqueue (ItemType);
+	public: void dequeue (ItemType&);
 	private: int length;
 	private: HeapType<ItemType> items;
 	private: int maxItems;

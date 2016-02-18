@@ -9,25 +9,25 @@ PQType<ItemType>::~PQType () {
 	delete [] items.elements;
 }
 template<class ItemType>
-void PQType<ItemType>::MakeEmpty () {
+void PQType<ItemType>::makeEmpty () {
 	length = 0;
 }
 template<class ItemType>
-bool PQType<ItemType>::IsEmpty () const {
+bool PQType<ItemType>::bIsEmpty () const {
 	return (length == 0);
 }
 template<class ItemType>
-bool PQType<ItemType>::IsFull () const {
+bool PQType<ItemType>::bIsFull () const {
 	return (length == maxItems);
 }
 template<class ItemType>
-void PQType<ItemType>::Enqueue (ItemType newItem) {
+void PQType<ItemType>::enqueue (ItemType newItem) {
 	items.elements[length] = newItem;
 	length++;
 	items.ReheapUp (0, length-1);
 }
 template<class ItemType>
-void PQType<ItemType>::Dequeue (ItemType& item) {
+void PQType<ItemType>::dequeue (ItemType& item) {
 	item = items.elements[0];
 	items.elements[0] = items.elements[length-1];
 	length--;
