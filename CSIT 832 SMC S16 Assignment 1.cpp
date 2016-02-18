@@ -75,13 +75,13 @@ void addJob (
 		std::cout << "Heap is full.\n";
 		std::cout << "\n";
 	} else {
-		char chUser;
+		char chUserType;
 		std::cout << "\n";
 		std::cout << "Instructor (I or i), TA (T or t), or Student (S or s)? ";
-		std::cin >> chUser;
+		std::cin >> chUserType;
 		std::cin.ignore (std::numeric_limits<std::streamsize>::max (), '\n');
 		std::cout << "\n";
-		switch (chUser) {
+		switch (chUserType) {
 			case 'I':
 			case 'i': { nJobs++; PrinterQueue.enqueue (printjob (printerusertype::Instructor, nJobs)); break; }
 			case 'T':
