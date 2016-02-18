@@ -10,7 +10,7 @@
 void displayMenu (
 	char&
 );
-typedef PQType<printjob> prioq;
+typedef PriorityQueue<printjob> prioq;
 void processChoice (
 	bool&,
 	const char&,

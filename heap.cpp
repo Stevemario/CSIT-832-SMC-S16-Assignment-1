@@ -1,13 +1,13 @@
 //  IMPLEMENTATION  OF RECURSIVE HEAP MEMBER FUNCTIONS
-template<class ItemType>
-void HeapType<ItemType>::Swap (ItemType& a, ItemType& b) {
-	ItemType temp;
+template<class HeapType>
+void Heap<HeapType>::Swap (HeapType& a, HeapType& b) {
+	HeapType temp;
 	temp = a;
 	a = b;
 	b = temp;
 }
-template<class ItemType>
-void HeapType<ItemType>::ReheapDown (int root, int bottom)
+template<class HeapType>
+void Heap<HeapType>::ReheapDown (int root, int bottom)
 // Pre:  root is the index of the node that may violate the
 // heap order property
 // Post: Heap order property is restored between root and bottom
@@ -33,8 +33,8 @@ void HeapType<ItemType>::ReheapDown (int root, int bottom)
 		}
 	}
 }
-template<class ItemType>
-void HeapType<ItemType>::ReheapUp (int root, int bottom)
+template<class HeapType>
+void Heap<HeapType>::ReheapUp (int root, int bottom)
 //  Pre:  bottom is the index of the node that may violate the heap
 //  order property.  The order property is satisfied from root to
 //  next-to-last node.

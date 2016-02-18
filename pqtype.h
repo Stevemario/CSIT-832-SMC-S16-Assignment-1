@@ -1,20 +1,19 @@
 #ifndef PQTYPE_H
 #define PQTYPE_H
 #include "heap.h"
-template<class ItemType>
-class PQType {
-	public: PQType (int);
-	public: ~PQType ();
-	public: void makeEmpty ();
-	public: bool bIsEmpty () const;
-	public: bool bIsFull () const;
-	public: void enqueue (ItemType);
-	public: void dequeue (ItemType&);
-	private: int length;
-	private: HeapType<ItemType> items;
+template<class PriorityQueueType>
+class PriorityQueue {
+	public: PriorityQueue (int);
+	public: ~PriorityQueue ();
 	private: int maxItems;
+	public: bool bIsFull () const;
+	public: bool bIsEmpty () const;
+	public: void enqueue (PriorityQueueType);
+	public: void dequeue (PriorityQueueType&);
+	private: int m_nElements;
 	public: int nElements () const;
-	public: ItemType* copy_elements () const;
+	private: Heap<PriorityQueueType> items;
+	public: PriorityQueueType* copy_elements () const;
 };
 #include "pqtype.cpp"
 #endif
