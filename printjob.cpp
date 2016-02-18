@@ -28,18 +28,18 @@ int printjob::nJob (
 	return m_nJob;
 }
 bool printjob::operator< (const printjob& printjobToCompare) const {
-	bool bMemberHasBetterPriority = false;
+	bool bMemberHasWorsePriority = false;
 	int nUTMember = int (m_printerusertype);
 	int nUTToCompare = int (printjobToCompare.printerusertype_ ());
-	if (nUTMember < nUTToCompare) {
-		bMemberHasBetterPriority = true;
+	if (nUTMember > nUTToCompare) {
+		bMemberHasWorsePriority = true;
 	} else if (nUTMember == nUTToCompare) {
 		int nJobMember = m_nJob;
 		int nJobToCompare = printjobToCompare.nJob ();
-		if (nJobMember < nJobToCompare)
-			bMemberHasBetterPriority = true;
+		if (nJobMember > nJobToCompare)
+			bMemberHasWorsePriority = true;
 	}
-	return bMemberHasBetterPriority;
+	return bMemberHasWorsePriority;
 }
 bool printjob::operator== (const printjob& printjobToCompare) const {
 	bool bMemberHasEqualPriority = false;

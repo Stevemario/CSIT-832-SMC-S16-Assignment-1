@@ -4,8 +4,10 @@
 template<class PriorityQueueType>
 class PriorityQueue {
 	public: PriorityQueue (int);
+	public: PriorityQueue (const PriorityQueue&);
 	public: ~PriorityQueue ();
-	private: int maxItems;
+	private: int m_nCapacity;
+	public: int nCapacity () const;
 	public: bool bIsFull () const;
 	public: bool bIsEmpty () const;
 	public: void enqueue (PriorityQueueType);
@@ -13,7 +15,7 @@ class PriorityQueue {
 	private: int m_nElements;
 	public: int nElements () const;
 	private: Heap<PriorityQueueType> items;
-	public: PriorityQueueType* copy_elements () const;
+	public: PriorityQueueType element (int) const;
 };
 #include "pqtype.cpp"
 #endif

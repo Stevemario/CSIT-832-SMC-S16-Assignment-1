@@ -1,16 +1,29 @@
 template<class PriorityQueueType>
-PriorityQueue<PriorityQueueType>::PriorityQueue (int max) {
-	maxItems = max;
-	items.elements = new PriorityQueueType[max];
+PriorityQueue<PriorityQueueType>::PriorityQueue (int nCapacity) {
+	m_nCapacity = nCapacity;
+	items.elements = new PriorityQueueType[nCapacity];
 	m_nElements = 0;
+}
+template<class PriorityQueueType>
+PriorityQueue<PriorityQueueType>::PriorityQueue (const PriorityQueue& pqToCopy) {
+	m_nCapacity = pqToCopy.nCapacity ();
+	items.elements = new PriorityQueueType[m_nCapacity];
+	m_nElements = pqToCopy.nElements ();
+	for (int i = 0; i < m_nElements; i++) {
+		items.elements[i] = pqToCopy.element (i);
+	}
 }
 template<class PriorityQueueType>
 PriorityQueue<PriorityQueueType>::~PriorityQueue () {
 	delete [] items.elements;
 }
 template<class PriorityQueueType>
+int PriorityQueue<PriorityQueueType>::nCapacity () const {
+	return m_nCapacity;
+}
+template<class PriorityQueueType>
 bool PriorityQueue<PriorityQueueType>::bIsFull () const {
-	return (m_nElements == maxItems);
+	return (m_nElements >= m_nCapacity);
 }
 template<class PriorityQueueType>
 bool PriorityQueue<PriorityQueueType>::bIsEmpty () const {
@@ -34,10 +47,7 @@ int PriorityQueue<PriorityQueueType>::nElements () const {
 	return m_nElements;
 }
 template<class PriorityQueueType>
-PriorityQueueType* PriorityQueue<PriorityQueueType>::copy_elements () const {
-	PriorityQueueType* copy = new PriorityQueueType[m_nElements];
-	for (int i = 0; i < m_nElements; i++) {
-		copy[i] = items.elements[i];
-	}
-	return copy;
+PriorityQueueType PriorityQueue<PriorityQueueType>::element (int nIndex) const {
+	PriorityQueueType element = items.elements[nIndex];
+	return element;
 }
