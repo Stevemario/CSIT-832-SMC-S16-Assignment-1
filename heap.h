@@ -4,8 +4,8 @@
 // type or a class with overloaded relational operators.
 template<class HeapType>
 struct Heap {
-	void ReheapDown (int root, int bottom) ;
-	void ReheapUp (int root, int bottom) ;
+	void ReheapDown (int, int);
+	void ReheapUp (int, int);
 	void Swap (HeapType&, HeapType&);
 
 	HeapType* elements; //array to be allocated dynamically
