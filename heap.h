@@ -3,7 +3,7 @@
 template<class HeapType>
 struct Heap {
 	void ReheapDown (int, int);
-	void ReheapUp (int, int);
+	void ReheapUp (int, const int, const int);
 	void Swap (HeapType&, HeapType&);
 
 	HeapType* elements; //array to be allocated dynamically

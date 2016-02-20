@@ -34,19 +34,67 @@ void Heap<HeapType>::ReheapDown (int root, int bottom)
 	}
 }
 template<class HeapType>
-void Heap<HeapType>::ReheapUp (int root, int bottom)
+void Heap<HeapType>::ReheapUp (int nNodeIndex, const int root, const int nElements)
 //  Pre:  bottom is the index of the node that may violate the heap
 //  order property.  The order property is satisfied from root to
 //  next-to-last node.
 //  Post:  Heap order property is restored between root and bottom
 {
-	int parent;
+	int nParentNodeIndex;
 
-	if (root < bottom) {
-		parent = (bottom - 1) / 2;
-		if (elements[parent] < elements[bottom]) {
-			Swap ( elements[parent], elements[bottom]);
-			ReheapUp (root, parent);
+	if (nNodeIndex > 0 && nNodeIndex < nElements) {
+	//if the node's index is positive, and
+	//   the node's index is an index for a placed node.
+
+		if (root < nNodeIndex) {
+
+			//A node X has 2 children at:
+			//A. 2 * X's index, and
+			//B. 2 * X's index + 1.
+			//So a node Y can have a parent at:
+			//A. Y's index / 2, or
+			//B. (Y's index - 1) / 2,
+			//depending on which child it is,
+			//left child or right child.
+			//Left children's indexes are always odd, meaning
+			//left chidren's indexes % 2 will equal 1.
+			//Right children's indexes are always even, meaning
+			//right children's indexes % 2 will equal 0.
+
+			if (nNodeIndex % 2 == 0) {
+			//if the node's index is even, meaning
+			//if the node is a left child
+				nParentNodeIndex = nNodeIndex / 2;
+				//the node's parent's index is the node's index divided by two.
+			} else {
+			//if the node's index is not even, meaning
+			//if the node's index is odd, meaning
+			//if the node is a right child
+				nParentNodeIndex = (nNodeIndex - 1) / 2;
+				//the node's parent's index is the difference of
+				//the node's index and one,
+				//divided by two.
+			}
+
+			//Using what we know about even and odd numbers,
+			//we can simplify to
+			//PROFESSOR KENT'S CODE:
+			//parent = (bottom - 1) / 2;
+
+			if (elements[nParentNodeIndex] < elements[nNodeIndex]) {
+			//if the parent node's priority
+			//is lesser than
+			//the child node's priority
+
+				//the heap's rules are violated.
+				//To fix that we start by
+
+				Swap (elements[nParentNodeIndex], elements[nNodeIndex]);
+				//swapping the node with it's parent
+
+				ReheapUp (nParentNodeIndex, root, nElements);
+				//and repeating until the requirements are met.
+			}
 		}
 	}
 }

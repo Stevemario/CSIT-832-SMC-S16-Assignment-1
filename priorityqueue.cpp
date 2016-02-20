@@ -32,8 +32,8 @@ bool PriorityQueue<PriorityQueueType>::bIsEmpty () const {
 template<class PriorityQueueType>
 void PriorityQueue<PriorityQueueType>::enqueue (PriorityQueueType newItem) {
 	items.elements[m_nElements] = newItem;
+	items.ReheapUp (m_nElements, 0, m_nElements + 1);
 	m_nElements++;
-	items.ReheapUp (0, m_nElements-1);
 }
 template<class PriorityQueueType>
 void PriorityQueue<PriorityQueueType>::dequeue (PriorityQueueType& item) {
