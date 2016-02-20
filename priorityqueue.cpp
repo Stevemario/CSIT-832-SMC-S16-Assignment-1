@@ -56,15 +56,12 @@ PriorityQueueType PriorityQueue<PriorityQueueType>::element (int nIndex) const {
 template<class PriorityQueueType>
 int PriorityQueue<PriorityQueueType>::nGeneration (const int nIndex) {
 	int nGeneration = 0;
-	int nFactor;
+	int nFactor = 1;
 	bool bMultiple = true;
 	while (bMultiple) {
 		nGeneration++;
+		nFactor *= 2;
 		bMultiple = false;
-		nFactor = 1;
-		for (int i = 0; i < nGeneration; i++) {
-			nFactor *= 2;
-		}
 		if ((nIndex / nFactor) > 0)
 			bMultiple = true;
 	}
