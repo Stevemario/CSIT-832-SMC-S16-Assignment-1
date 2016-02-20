@@ -8,65 +8,64 @@ void Heap<HeapType>::ReheapUp (int nNodeIndex, int nGenerations, const int nElem
 {
 	int nParentNodeIndex;
 
-	if (nNodeIndex > 0 && nNodeIndex < nElements) {
+	if (nNodeIndex > 0 && nNodeIndex < nElements && nGenerations > 0) {
 	//if the node's index is positive, and
-	//   the node's index is an index for a placed node.
+	//   the node's index is an index for a placed node, and
+	//   the number of generations to heap up is positive
 
-		if (nGenerations > 0) {
-		//if the number of generations to heap up is positive
+		//A node X has 2 children at:
+		//A. 2 * X's index + 1, and
+		//B. 2 * X's index + 2.
+		//So a node Y can have a parent at:
+		//A. (Y's index - 1) / 2, or
+		//B. (Y's index - 2) / 2,
+		//depending on which child it is,
+		//left child or right child.
+		//Left children's indexes are always odd, meaning
+		//left chidren's indexes % 2 will equal 1.
+		//Right children's indexes are always even, meaning
+		//right children's indexes % 2 will equal 0.
 
-			//A node X has 2 children at:
-			//A. 2 * X's index + 1, and
-			//B. 2 * X's index + 2.
-			//So a node Y can have a parent at:
-			//A. (Y's index - 1) / 2, or
-			//B. (Y's index - 2) / 2,
-			//depending on which child it is,
-			//left child or right child.
-			//Left children's indexes are always odd, meaning
-			//left chidren's indexes % 2 will equal 1.
-			//Right children's indexes are always even, meaning
-			//right children's indexes % 2 will equal 0.
+		if (nNodeIndex % 2 == 0) {
+		//if the node's index is even, meaning
+		//if the node is a right child
 
-			if (nNodeIndex % 2 == 0) {
-			//if the node's index is even, meaning
-			//if the node is a right child
-				nParentNodeIndex = (nNodeIndex - 2) / 2;
-				//the node's parent's index is the difference of
-				//the node's index and two,
-				//divided by two.
-			} else {
-			//if the node's index is not even, meaning
-			//if the node's index is odd, meaning
-			//if the node is a left child
-				nParentNodeIndex = (nNodeIndex - 1) / 2;
-				//the node's parent's index is the difference of
-				//the node's index and one,
-				//divided by two.
-			}
+			nParentNodeIndex = (nNodeIndex - 2) / 2;
+			//the node's parent's index is the difference of
+			//the node's index and two,
+			//divided by two.
+		} else {
+		//if the node's index is not even, meaning
+		//if the node's index is odd, meaning
+		//if the node is a left child
 
-			//Using what we know about even numbers, and integers,
-			//we can simplify to
-			//PROFESSOR KENT'S CODE:
-			//parent = (bottom - 1) / 2;
+			nParentNodeIndex = (nNodeIndex - 1) / 2;
+			//the node's parent's index is the difference of
+			//the node's index and one,
+			//divided by two.
+		}
 
-			if (elements[nParentNodeIndex] < elements[nNodeIndex]) {
-			//if the parent node's priority
-			//is lesser than
-			//the child node's priority
+		//Using what we know about even numbers, and integers,
+		//we can simplify to
+		//PROFESSOR KENT'S CODE:
+		//parent = (bottom - 1) / 2;
 
-				//the heap's rules are violated.
-				//To fix that we start by
+		if (elements[nParentNodeIndex] < elements[nNodeIndex]) {
+		//if the parent node's priority
+		//is lesser than
+		//the child node's priority
 
-				Swap (elements[nParentNodeIndex], elements[nNodeIndex]);
-				//swapping the node with it's parent
+			//the heap's rules are violated.
+			//To fix that we start by
 
-				nGenerations--;
-				//note that we've gone up a generation
+			Swap (elements[nParentNodeIndex], elements[nNodeIndex]);
+			//swapping the node with it's parent
 
-				ReheapUp (nParentNodeIndex, nGenerations, nElements);
-				//and repeating until the requirements are met.
-			}
+			nGenerations--;
+			//note that we've gone up a generation
+
+			ReheapUp (nParentNodeIndex, nGenerations, nElements);
+			//and repeating until the requirements are met.
 		}
 	}
 }
