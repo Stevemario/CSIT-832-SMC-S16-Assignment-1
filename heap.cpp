@@ -50,11 +50,11 @@ void Heap<HeapType>::ReheapUp (int nNodeIndex, int nGenerations, const int nElem
 		//if the number of generations to heap up is positive
 
 			//A node X has 2 children at:
-			//A. 2 * X's index, and
-			//B. 2 * X's index + 1.
+			//A. 2 * X's index + 1, and
+			//B. 2 * X's index + 2.
 			//So a node Y can have a parent at:
-			//A. Y's index / 2, or
-			//B. (Y's index - 1) / 2,
+			//A. (Y's index - 1) / 2, or
+			//B. (Y's index - 2) / 2,
 			//depending on which child it is,
 			//left child or right child.
 			//Left children's indexes are always odd, meaning
@@ -64,20 +64,22 @@ void Heap<HeapType>::ReheapUp (int nNodeIndex, int nGenerations, const int nElem
 
 			if (nNodeIndex % 2 == 0) {
 			//if the node's index is even, meaning
-			//if the node is a left child
-				nParentNodeIndex = nNodeIndex / 2;
-				//the node's parent's index is the node's index divided by two.
+			//if the node is a right child
+				nParentNodeIndex = (nNodeIndex - 2) / 2;
+				//the node's parent's index is the difference of
+				//the node's index and two,
+				//divided by two.
 			} else {
 			//if the node's index is not even, meaning
 			//if the node's index is odd, meaning
-			//if the node is a right child
+			//if the node is a left child
 				nParentNodeIndex = (nNodeIndex - 1) / 2;
 				//the node's parent's index is the difference of
 				//the node's index and one,
 				//divided by two.
 			}
 
-			//Using what we know about even and odd numbers,
+			//Using what we know about even numbers, and integers,
 			//we can simplify to
 			//PROFESSOR KENT'S CODE:
 			//parent = (bottom - 1) / 2;
