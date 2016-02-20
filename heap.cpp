@@ -82,15 +82,15 @@ void Heap<HeapType>::ReheapDown (int nNodeIndex, int nGenerations, const int nEl
 	leftChild = 2 * nNodeIndex + 1;
 	rightChild = 2 * nNodeIndex + 2;
 
-	if (nNodeIndex > 0 && nNodeIndex < nElements  && nGenerations > 0) {
-	//if the node's index is positive, and
+	if (nNodeIndex >= 0 && nNodeIndex < nElements  && nGenerations > 0) {
+	//if the node's index is positive, or zero, and
 	//   the node's index is an index for a placed node, and
 	//   the number of generations to heap up is positive.
 
-		if (leftChild <= nElements) {
+		if (leftChild <= nElements - 1) {
 		//if the left child is within the heap
 
-			if (leftChild == nElements)
+			if (leftChild == nElements - 1)
 			//if the left child is the last element
 
 				maxChild = leftChild;
@@ -131,7 +131,7 @@ void Heap<HeapType>::ReheapDown (int nNodeIndex, int nGenerations, const int nEl
 				//To fix that we start by
 
 				Swap (elements[nNodeIndex], elements[maxChild]);
-				//swapping the node with it's parent
+				//swapping the node with it's bigger child
 
 				nGenerations--;
 				//note that we've gone down a generation

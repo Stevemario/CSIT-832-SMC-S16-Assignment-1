@@ -44,7 +44,7 @@ void PriorityQueue<PriorityQueueType>::dequeue (PriorityQueueType& item) {
 	items.elements[0] = items.elements[m_nElements-1];
 	m_nElements--;
 	nHeight = nGeneration (m_nElements);
-	items.ReheapDown (0, nHeight, m_nElements - 1);
+	items.ReheapDown (0, nHeight, m_nElements);
 }
 template<class PriorityQueueType>
 int PriorityQueue<PriorityQueueType>::nElements () const {
