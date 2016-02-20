@@ -31,9 +31,11 @@ bool PriorityQueue<PriorityQueueType>::bIsEmpty () const {
 }
 template<class PriorityQueueType>
 void PriorityQueue<PriorityQueueType>::enqueue (PriorityQueueType newItem) {
+	int nHeight;
 	items.elements[m_nElements] = newItem;
-	items.ReheapUp (m_nElements, 0, m_nElements + 1);
 	m_nElements++;
+	nHeight = nGeneration (m_nElements);
+	items.ReheapUp (m_nElements - 1, nHeight, m_nElements);
 }
 template<class PriorityQueueType>
 void PriorityQueue<PriorityQueueType>::dequeue (PriorityQueueType& item) {
@@ -50,4 +52,21 @@ template<class PriorityQueueType>
 PriorityQueueType PriorityQueue<PriorityQueueType>::element (int nIndex) const {
 	PriorityQueueType element = items.elements[nIndex];
 	return element;
+}
+template<class PriorityQueueType>
+int PriorityQueue<PriorityQueueType>::nGeneration (const int nIndex) {
+	int nGeneration = 0;
+	int nFactor;
+	bool bMultiple = true;
+	while (bMultiple) {
+		nGeneration++;
+		bMultiple = false;
+		nFactor = 1;
+		for (int i = 0; i < nGeneration; i++) {
+			nFactor *= 2;
+		}
+		if ((nIndex / nFactor) > 0)
+			bMultiple = true;
+	}
+	return nGeneration;
 }

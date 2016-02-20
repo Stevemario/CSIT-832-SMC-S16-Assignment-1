@@ -16,6 +16,7 @@ class PriorityQueue {
 	public: int nElements () const;
 	private: Heap<PriorityQueueType> items;
 	public: PriorityQueueType element (int) const;
+	public: static int nGeneration (const int);
 };
 #include "priorityqueue.cpp"
 #endif

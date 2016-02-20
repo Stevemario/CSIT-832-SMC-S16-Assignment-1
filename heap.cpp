@@ -34,7 +34,7 @@ void Heap<HeapType>::ReheapDown (int root, int bottom)
 	}
 }
 template<class HeapType>
-void Heap<HeapType>::ReheapUp (int nNodeIndex, const int root, const int nElements)
+void Heap<HeapType>::ReheapUp (int nNodeIndex, int nGenerations, const int nElements)
 //  Pre:  bottom is the index of the node that may violate the heap
 //  order property.  The order property is satisfied from root to
 //  next-to-last node.
@@ -46,7 +46,8 @@ void Heap<HeapType>::ReheapUp (int nNodeIndex, const int root, const int nElemen
 	//if the node's index is positive, and
 	//   the node's index is an index for a placed node.
 
-		if (root < nNodeIndex) {
+		if (nGenerations > 0) {
+		//if the number of generations to heap up is positive
 
 			//A node X has 2 children at:
 			//A. 2 * X's index, and
@@ -92,7 +93,10 @@ void Heap<HeapType>::ReheapUp (int nNodeIndex, const int root, const int nElemen
 				Swap (elements[nParentNodeIndex], elements[nNodeIndex]);
 				//swapping the node with it's parent
 
-				ReheapUp (nParentNodeIndex, root, nElements);
+				nGenerations--;
+				//note that we've gone up a generation
+
+				ReheapUp (nParentNodeIndex, nGenerations, nElements);
 				//and repeating until the requirements are met.
 			}
 		}
