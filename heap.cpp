@@ -2,7 +2,7 @@
 template<class HeapType>
 void Heap<HeapType>::ReheapUp (int nNodeIndex, int nGenerations, const int nElements)
 //This function checks
-//if a node has higher priority than a number of its predecessors, and
+//if a node has greater priority than a number of its predecessors, and
 //if it does,
 //it swaps the node's place in the heap with its predecessors.
 {
@@ -71,9 +71,10 @@ void Heap<HeapType>::ReheapUp (int nNodeIndex, int nGenerations, const int nElem
 }
 template<class HeapType>
 void Heap<HeapType>::ReheapDown (int nNodeIndex, int nGenerations, const int nElements)
-// Pre:  root is the index of the node that may violate the
-// heap order property
-// Post: Heap order property is restored between root and bottom
+//This function checks
+//if a node has lesser priority than a number of its children, and
+//if it does,
+//it swaps the node's place in the heap with its successor.
 {
 	int maxChild ;
 	int rightChild ;
