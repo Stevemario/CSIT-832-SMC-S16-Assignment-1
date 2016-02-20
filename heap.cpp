@@ -7,7 +7,7 @@ void Heap<HeapType>::Swap (HeapType& a, HeapType& b) {
 	b = temp;
 }
 template<class HeapType>
-void Heap<HeapType>::ReheapDown (int root, int bottom)
+void Heap<HeapType>::ReheapDown (int nNodeIndex, int nGenerations, const int nElements)
 // Pre:  root is the index of the node that may violate the
 // heap order property
 // Post: Heap order property is restored between root and bottom
@@ -16,20 +16,66 @@ void Heap<HeapType>::ReheapDown (int root, int bottom)
 	int rightChild ;
 	int leftChild ;
 
-	leftChild  =  root * 2 + 1;
-	rightChild  =  root * 2 + 2;
-	if (leftChild  <=  bottom) {
-		if (leftChild == bottom)
-			maxChild  =  leftChild ;
-		else {
-			if (elements [leftChild] <= elements [rightChild])
-				maxChild  =  rightChild ;
-			else
-			maxChild  =  leftChild ;
-		}
-		if (elements [root] < elements [maxChild]) {
-			Swap (elements [root] , elements [maxChild]);
-			ReheapDown (maxChild, bottom);
+	leftChild = 2 * nNodeIndex + 1;
+	rightChild = 2 * nNodeIndex + 2;
+
+	if (nNodeIndex > 0 && nNodeIndex < nElements  && nGenerations > 0) {
+	//if the node's index is positive, and
+	//   the node's index is an index for a placed node, and
+	//   the number of generations to heap up is positive.
+
+		if (leftChild <= nElements) {
+		//if the left child is within the heap
+
+			if (leftChild == nElements)
+			//if the left child is the last element
+
+				maxChild = leftChild;
+				//the right child is not within the heap, so
+				//the left child is the bigger valid child
+
+			else {
+			//if the left child is not the last element, meaning
+			//both left and right children could be promoted
+
+				if (elements[leftChild] < elements[rightChild])
+				//if the left child's priority
+				//is lesser than
+				//the right child's priority
+
+					maxChild = rightChild;
+					//the right child is the bigger child
+
+				else
+				//if the left child's priority
+				//is not lesser than
+				//the right child's priority
+
+					maxChild = leftChild;
+					//the left child is the bigger child,
+					//in this case, due the job class member
+					//job will prevent equal priority.
+					//in other cases, ties are possible,
+					//but not important, left child is chosen
+					//just because one has to be chosen.
+			}
+			if (elements[nNodeIndex] < elements[maxChild]) {
+			//if the node's priority
+			//is lesser than
+			//the bigger child's priority
+				
+				//the heap's rules are violated.
+				//To fix that we start by
+
+				Swap (elements[nNodeIndex], elements[maxChild]);
+				//swapping the node with it's parent
+
+				nGenerations--;
+				//note that we've gone down a generation
+
+				ReheapDown (maxChild, nGenerations, nElements);
+				//and repeating until the requirements are met.
+			}
 		}
 	}
 }

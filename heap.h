@@ -2,7 +2,7 @@
 #define HEAP_H
 template<class HeapType>
 struct Heap {
-	void ReheapDown (int, int);
+	void ReheapDown (int, int, const int);
 	void ReheapUp (int, int, const int);
 	void Swap (HeapType&, HeapType&);
 
