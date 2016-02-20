@@ -32,16 +32,16 @@ int printjob::nJob (
 bool printjob::operator< (
 	const printjob& printjobToCompare
 ) const {
-	bool bMemberHasWorsePriority = false;
+	bool bMemberHasLesserPriority = false;
 	int nUTMember = int (m_printerusertype);
 	int nUTToCompare = int (printjobToCompare.printerusertype_ ());
 	if (nUTMember > nUTToCompare) {
-		bMemberHasWorsePriority = true;
+		bMemberHasLesserPriority = true;
 	} else if (nUTMember == nUTToCompare) {
 		int nJobMember = m_nJob;
 		int nJobToCompare = printjobToCompare.nJob ();
 		if (nJobMember > nJobToCompare)
-			bMemberHasWorsePriority = true;
+			bMemberHasLesserPriority = true;
 	}
-	return bMemberHasWorsePriority;
+	return bMemberHasLesserPriority;
 }
