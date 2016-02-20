@@ -15,7 +15,5 @@ class printjob {
 	private: int m_nJob;
 	public: int nJob () const;
 	public: bool operator< (const printjob&) const;
-	public: bool operator== (const printjob&) const;
-	public: bool operator<= (const printjob&) const;
 };
 #endif

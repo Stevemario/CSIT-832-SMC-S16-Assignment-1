@@ -45,28 +45,3 @@ bool printjob::operator< (
 	}
 	return bMemberHasWorsePriority;
 }
-bool printjob::operator== (
-	const printjob& printjobToCompare
-) const {
-	bool bMemberHasEqualPriority = false;
-	int nUTMember = int (m_printerusertype);
-	int nUTToCompare = int (printjobToCompare.printerusertype_ ());
-	if (nUTMember == nUTToCompare) {
-		int nJobMember = m_nJob;
-		int nJobToCompare = printjobToCompare.nJob ();
-		if (nJobMember == nJobToCompare)
-			bMemberHasEqualPriority = true;
-	}
-	return bMemberHasEqualPriority;
-}
-bool printjob::operator<= (
-	const printjob& printjobToCompare
-) const {
-	bool bMemberHasAsGoodPriority = false;
-	if (this->operator<(printjobToCompare)) {
-		bMemberHasAsGoodPriority = true;
-	} else if (this->operator==(printjobToCompare)) {
-		bMemberHasAsGoodPriority = true;
-	}
-	return bMemberHasAsGoodPriority;
-}
