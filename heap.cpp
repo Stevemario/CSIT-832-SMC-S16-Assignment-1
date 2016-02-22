@@ -76,9 +76,9 @@ void Heap<HeapType>::ReheapDown (int nNodeIndex, int nGenerations, const int nEl
 //if it does,
 //it swaps the node's place in the heap with its successor.
 {
-	int maxChild ;
-	int rightChild ;
-	int leftChild ;
+	int maxChild;
+	int rightChild;
+	int leftChild;
 
 	leftChild = 2 * nNodeIndex + 1;
 	rightChild = 2 * nNodeIndex + 2;
