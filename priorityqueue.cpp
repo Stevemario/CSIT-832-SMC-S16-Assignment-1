@@ -35,16 +35,18 @@ void PriorityQueue<PriorityQueueType>::enqueue (PriorityQueueType newItem) {
 	items.elements[m_nElements] = newItem;
 	m_nElements++;
 	nHeight = nGeneration (m_nElements);
-	items.ReheapUp (m_nElements - 1, nHeight, m_nElements);
+	items.ReheapUp (m_nElements - 1, nHeight - 1, m_nElements);
 }
 template<class PriorityQueueType>
 void PriorityQueue<PriorityQueueType>::dequeue (PriorityQueueType& item) {
 	int nHeight;
 	item = items.elements[0];
-	items.elements[0] = items.elements[m_nElements-1];
 	m_nElements--;
-	nHeight = nGeneration (m_nElements);
-	items.ReheapDown (0, nHeight, m_nElements);
+	if (0 < m_nElements) {
+		items.elements[0] = items.elements[m_nElements];
+		nHeight = nGeneration (m_nElements);
+		items.ReheapDown (0, nHeight - 1, m_nElements);
+	}
 }
 template<class PriorityQueueType>
 int PriorityQueue<PriorityQueueType>::nElements () const {
@@ -59,13 +61,9 @@ template<class PriorityQueueType>
 int PriorityQueue<PriorityQueueType>::nGeneration (const int nIndex) {
 	int nGeneration = 0;
 	int nFactor = 1;
-	bool bMultiple = true;
-	while (bMultiple) {
+	while ((nIndex / nFactor) > 0) {
 		nGeneration++;
 		nFactor *= 2;
-		bMultiple = false;
-		if ((nIndex / nFactor) > 0)
-			bMultiple = true;
 	}
 	return nGeneration;
 }
