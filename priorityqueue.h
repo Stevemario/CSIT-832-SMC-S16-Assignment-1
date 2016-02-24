@@ -3,12 +3,9 @@
 #include "heap.h"
 template<class PriorityQueueType>
 class PriorityQueue {
-	public: PriorityQueue (int);
+	public: PriorityQueue ();
 	public: PriorityQueue (const PriorityQueue&);
 	public: ~PriorityQueue ();
-	private: int m_nCapacity;
-	public: int nCapacity () const;
-	public: bool bIsFull () const;
 	public: bool bIsEmpty () const;
 	public: void enqueue (PriorityQueueType);
 	public: void dequeue (PriorityQueueType&);

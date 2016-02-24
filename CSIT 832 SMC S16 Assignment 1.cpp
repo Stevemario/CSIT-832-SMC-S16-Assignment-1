@@ -33,7 +33,7 @@ int main (
 	bool bUserWantsToManageQueue = true;
 	char chOperationToDo;
 	int nJobs = 0;
-	PJPrioQ PrinterQueue (20);
+	PJPrioQ PrinterQueue;
 	while (bUserWantsToManageQueue) {
 		displayMenu (chOperationToDo);
 		processChoice (bUserWantsToManageQueue, chOperationToDo, nJobs, PrinterQueue);
@@ -71,26 +71,20 @@ void addJob (
 	int& nJobs,
 	PJPrioQ& PrinterQueue
 ) {
-	if (PrinterQueue.bIsFull ()) {
-		std::cout << "\n";
-		std::cout << "Heap is full.\n";
-		std::cout << "\n";
-	} else {
-		char chUserType;
-		std::cout << "\n";
-		std::cout << "Instructor (I or i), TA (T or t), or Student (S or s)? ";
-		std::cin >> chUserType;
-		std::cin.ignore (std::numeric_limits<std::streamsize>::max (), '\n');
-		std::cout << "\n";
-		switch (chUserType) {
-			case 'I':
-			case 'i': { nJobs++; PrinterQueue.enqueue (printjob (printerusertype::Instructor, nJobs)); break; }
-			case 'T':
-			case 't': { nJobs++; PrinterQueue.enqueue (printjob (printerusertype::TeachersAssistant, nJobs)); break; }
-			case 'S':
-			case 's': { nJobs++; PrinterQueue.enqueue (printjob (printerusertype::Student, nJobs)); break; }
-			default: { break; }
-		}
+	char chUserType;
+	std::cout << "\n";
+	std::cout << "Instructor (I or i), TA (T or t), or Student (S or s)? ";
+	std::cin >> chUserType;
+	std::cin.ignore (std::numeric_limits<std::streamsize>::max (), '\n');
+	std::cout << "\n";
+	switch (chUserType) {
+		case 'I':
+		case 'i': { nJobs++; PrinterQueue.enqueue (printjob (printerusertype::Instructor, nJobs)); break; }
+		case 'T':
+		case 't': { nJobs++; PrinterQueue.enqueue (printjob (printerusertype::TeachersAssistant, nJobs)); break; }
+		case 'S':
+		case 's': { nJobs++; PrinterQueue.enqueue (printjob (printerusertype::Student, nJobs)); break; }
+		default: { break; }
 	}
 }
 void processJob (

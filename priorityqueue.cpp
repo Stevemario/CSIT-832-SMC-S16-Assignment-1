@@ -1,29 +1,17 @@
 template<class PriorityQueueType>
-PriorityQueue<PriorityQueueType>::PriorityQueue (int nCapacity) {
-	m_nCapacity = nCapacity;
-	items.elements = new PriorityQueueType[nCapacity];
+PriorityQueue<PriorityQueueType>::PriorityQueue () {
 	m_nElements = 0;
 }
 template<class PriorityQueueType>
 PriorityQueue<PriorityQueueType>::PriorityQueue (const PriorityQueue& pqToCopy) {
-	m_nCapacity = pqToCopy.nCapacity ();
-	items.elements = new PriorityQueueType[m_nCapacity];
 	m_nElements = pqToCopy.nElements ();
 	for (int i = 0; i < m_nElements; i++) {
-		items.elements[i] = pqToCopy.element (i);
+		items.elements.push_back (pqToCopy.element (i));
 	}
 }
 template<class PriorityQueueType>
 PriorityQueue<PriorityQueueType>::~PriorityQueue () {
-	delete [] items.elements;
-}
-template<class PriorityQueueType>
-int PriorityQueue<PriorityQueueType>::nCapacity () const {
-	return m_nCapacity;
-}
-template<class PriorityQueueType>
-bool PriorityQueue<PriorityQueueType>::bIsFull () const {
-	return (m_nElements >= m_nCapacity);
+	items.elements.clear ();
 }
 template<class PriorityQueueType>
 bool PriorityQueue<PriorityQueueType>::bIsEmpty () const {
@@ -32,7 +20,7 @@ bool PriorityQueue<PriorityQueueType>::bIsEmpty () const {
 template<class PriorityQueueType>
 void PriorityQueue<PriorityQueueType>::enqueue (PriorityQueueType newItem) {
 	int nHeight;
-	items.elements[m_nElements] = newItem;
+	items.elements.push_back (newItem);
 	m_nElements++;
 	nHeight = nGeneration (m_nElements);
 	items.ReheapUp (m_nElements - 1, nHeight - 1, m_nElements);
@@ -47,6 +35,7 @@ void PriorityQueue<PriorityQueueType>::dequeue (PriorityQueueType& item) {
 		nHeight = nGeneration (m_nElements);
 		items.ReheapDown (0, nHeight - 1, m_nElements);
 	}
+	items.elements.pop_back ();
 }
 template<class PriorityQueueType>
 int PriorityQueue<PriorityQueueType>::nElements () const {
